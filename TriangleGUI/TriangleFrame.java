@@ -11,8 +11,8 @@ import javax.swing.JFrame;
 public class TriangleFrame extends JFrame
 {
     /** description of instance variable x (add comment for each instance variable) */
-    private static final int FRAME_WIDTH = 300;
-    private static final int FRAME_HEIGHT = 400;
+    private static final int FRAME_WIDTH = 700;
+    private static final int FRAME_HEIGHT = 700;
     private TriangleComponent scene;
 
     class MousePressListener implements MouseListener
@@ -21,8 +21,7 @@ public class TriangleFrame extends JFrame
         {
             int x = event.getX();
             int y = event.getY();
-            int clickCount= event.getClickCount();
-            scene.moveDotTo(x, y, clickCount);
+            scene.moveDotTo(x, y);
         }
 
         public void mouseReleased(MouseEvent event) {

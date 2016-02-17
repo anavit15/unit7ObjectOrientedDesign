@@ -2,6 +2,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import javax.swing.JComponent;
+import java.awt.geom.Line2D;
 
 /**
  * Write a description of class TriangleComponent here.
@@ -18,41 +19,60 @@ public class TriangleComponent extends JComponent
     private Rectangle dot;
     private Rectangle dot2;
     private Rectangle dot3;
+    private Line2D.Double line;
+    private int status;
 
     /**
      * Default constructor for objects of class TriangleComponent
      */
     public TriangleComponent()
     {
-        // initialise instance variables
-        dot=new Rectangle (-1,-1, 10, BOX_HEIGHT);
-        dot2=new Rectangle (-1,-1, BOX_WIDTH, BOX_HEIGHT);
-        dot3=new Rectangle (-1,-1, BOX_WIDTH, BOX_HEIGHT);
+       status=-1;
     }
 
     public void paintComponent(Graphics g)
     {
         Graphics2D g2= (Graphics2D) g;
-        g2.draw(dot);
-        g2.draw(dot2);
-        g2.draw(dot3);
+        if (status==0)
+        {
+            g2.draw(dot);
+        }
+        else if(status==1)
+        {
+            g2.draw(dot2);
+            g2.draw(new Line2D.Double(dot.getX(), dot.getY(), dot2.getX(), dot2.getY()));
+        }
+        else if (status==2)
+        {
+            g2.draw(dot3);
+            g2.draw(new Line2D.Double(dot.getX(), dot.getY(), dot2.getX(), dot2.getY()));
+            g2.draw(new Line2D.Double(dot.getX(), dot.getY(), dot3.getX(), dot3.getY()));
+            g2.draw(new Line2D.Double(dot2.getX(), dot2.getY(), dot3.getX(), dot3.getY()));
+        }
+        else if (status==3)
+        {
+            status=-1;
+        }
+        status++;
+        
+        
     }
 
     public void moveDotTo(int x, int y)
     {
-        int clicks=0
-        if (clickCount==1)
+        if (status==0)
         {
-            dot.setLocation(x, y);
-            repaint();
-            clickCount++;
+            dot=new Rectangle (x,y, BOX_HEIGHT, BOX_HEIGHT);
         }
-        else if (clickCount==2)
+        else if (status==1)
         {
-            dot2.setLocation(x, y);
-            repaint();
+            dot2=new Rectangle (x,y, BOX_HEIGHT, BOX_HEIGHT);
         }
-            
+        else if (status==2)
+        {
+            dot3=new Rectangle (x,y, BOX_HEIGHT, BOX_HEIGHT);
+        }
+        repaint();
     }
 
 }
