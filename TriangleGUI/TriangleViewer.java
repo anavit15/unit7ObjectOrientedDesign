@@ -23,9 +23,6 @@ public class TriangleViewer
     public static void main (String [] args)
     {
         JFrame frame=new TriangleFrame();
-        frame.setTitle("Triangle");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+        //this can also be in the frame class
     }
-
 }

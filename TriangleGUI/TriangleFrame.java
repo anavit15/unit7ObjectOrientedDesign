@@ -24,17 +24,22 @@ public class TriangleFrame extends JFrame
             scene.moveDotTo(x, y);
         }
 
-        public void mouseReleased(MouseEvent event) {
+        public void mouseReleased(MouseEvent event)
+        {
         }
 
-        public void mouseClicked(MouseEvent event) {
+        public void mouseClicked(MouseEvent event)
+        {
         }
 
-        public void mouseEntered(MouseEvent event) {
+        public void mouseEntered(MouseEvent event)
+        {
         }
 
-        public void mouseExited(MouseEvent event) {
+        public void mouseExited(MouseEvent event) 
+        {
         }
+        
     }
 
     /**
@@ -49,6 +54,9 @@ public class TriangleFrame extends JFrame
         MouseListener listener=new MousePressListener();
         scene.addMouseListener(listener);
         
+        setTitle("Triangle");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setVisible(true);
         setSize(FRAME_WIDTH, FRAME_HEIGHT);
     }
 
