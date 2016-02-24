@@ -30,6 +30,7 @@ public class ControlPanel extends JPanel
         color= new JButton("Pick a Color");
         add(color);
         
+        canvas=dPanel;
         colorPanel=new JPanel();
         colorPanel.setBackground(canvas.getColor());
         add(colorPanel);
@@ -48,7 +49,7 @@ public class ControlPanel extends JPanel
         label = new JLabel();
         add(label);
         
-        canvas=dPanel;
+        
         
 
     }
@@ -67,11 +68,11 @@ public class ControlPanel extends JPanel
             }
             if (event.getActionCommand()== "Add a Circle")
             {
-                canvas.addCircle();
+                //canvas.addCircle();
             }
             if (event.getActionCommand()== "Add a Square")
             {
-                canvas.addSquare();
+                //canvas.addSquare();
             }
         }
      
