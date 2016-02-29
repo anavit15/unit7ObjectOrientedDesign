@@ -31,7 +31,7 @@ public class DrawingEditor extends JFrame
         setTitle("Drawing Editor");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-        setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        setSize(canvas.getPreferredSize());
         
         
         
