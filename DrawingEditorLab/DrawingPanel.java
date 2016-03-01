@@ -5,10 +5,10 @@ import java.awt.event.KeyListener;
 import javax.swing.JPanel;
 import java.awt.Color;
 import java.util.ArrayList;
-import java.awt.Shape;
 import javax.swing.JColorChooser;
 import java.awt.Dimension;
 import javax.swing.JComponent;
+import java.awt.Graphics2D;
 /**
  * Write a description of class DrawingPanel here.
  * 
@@ -20,7 +20,7 @@ public class DrawingPanel extends JPanel
     /** description of instance variable x (add comment for each instance variable) */
     Color drawingColor;
     ArrayList<Shape> shapes;
-    Shape activeShape;
+    boolean activeShape;
     JColorChooser colorChooser;
     private static final int FRAME_WIDTH = 800;
     private static final int FRAME_HEIGHT = 800;
@@ -101,7 +101,7 @@ public class DrawingPanel extends JPanel
     {
         Circle circle=new Circle(FRAME_WIDTH/2,FRAME_HEIGHT/2, 25, drawingColor);
         shapes.add(circle);
-        circle=activeShape;
+        activeShape=true;
         repaint();
     }
     
@@ -109,16 +109,17 @@ public class DrawingPanel extends JPanel
     {
         Square square=new Square(FRAME_WIDTH/2,FRAME_HEIGHT/2, 45, drawingColor);
         shapes.add(square);
-        square=activeShape;
+        activeShape=true;
         repaint();
     }
     
-    public void paintComponent(Graphics g)
+    public void paintComponent(Graphics2D g)
     {
+        super.paintComponent(g);
         Graphics2D g2= (Graphics2D) g;
         for (int i=shapes.size()-1; i>=0; i--)
         {
-            g2.draw(shapes.get(i));
+            shapes.get(i).draw(g2,true);
             
             
         }

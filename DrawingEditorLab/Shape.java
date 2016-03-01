@@ -1,5 +1,6 @@
 import java.awt.geom.Point2D;
 import java.awt.Color;
+import java.awt.Graphics2D;
 
 /**
  * Write a description of class Shape here.
@@ -7,12 +8,12 @@ import java.awt.Color;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Shape
+public abstract class Shape
 {
     /** description of instance variable x (add comment for each instance variable) */
-    Point2D.Double center;
-    double radius;
-    Color drawingColor;
+    private Point2D.Double center;
+    private double radius;
+    private Color drawingColor;
     
     public Shape(double x, double y, double r, Color color)
     {
@@ -41,16 +42,9 @@ public class Shape
         radius=r;
     }
     
-    public boolean isInside(Point2D.Double point);
-    
-    
-    public void draw(Graphics2D g2, boolean filled)
-    {
-        draw();
-        if (filled==true)
-        {
-            fill();
-        }
-    }
+    public abstract boolean isInside(Point2D.Double point);
+    //public abstract boolean isOnBorder(Point2D.Double point);
+    public abstract void draw(Graphics2D g2, boolean filled);
+  
     
 }
