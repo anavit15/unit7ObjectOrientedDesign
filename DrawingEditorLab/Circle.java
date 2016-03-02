@@ -20,7 +20,7 @@ public class Circle extends Shape
     {
         super(x, y, r, color);
         drawingcolor=color;
-        circle=new Ellipse2D.Double(getRadius(),getRadius(),getCenter().getX()-getRadius(),getCenter().getY()-getRadius());
+        circle=new Ellipse2D.Double(getRadius(),getRadius(),(getCenter().getX()),(getCenter().getY()));
         
     }
     

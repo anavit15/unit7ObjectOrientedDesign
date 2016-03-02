@@ -34,7 +34,7 @@ public class Square extends Shape
         Graphics2D g2= (Graphics2D) g;
         g2.setColor(drawingcolor);
         g2.draw(rectangle);
-        if (fill)
+        if (filled)
         {
             g2.fill(rectangle);
         }

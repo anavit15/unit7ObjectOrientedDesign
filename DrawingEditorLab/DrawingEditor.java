@@ -23,7 +23,7 @@ public class DrawingEditor extends JFrame
         setLayout(new BorderLayout());
         
         canvas=new DrawingPanel();
-        //add(canvas, BorderLayout.CENTER);
+        add(canvas, BorderLayout.CENTER);
         
         controls=new ControlPanel(canvas);
         add(controls, BorderLayout.SOUTH);

@@ -9,6 +9,8 @@ import javax.swing.JColorChooser;
 import java.awt.Dimension;
 import javax.swing.JComponent;
 import java.awt.Graphics2D;
+import java.awt.Graphics;
+import java.awt.geom.Point2D;
 /**
  * Write a description of class DrawingPanel here.
  * 
@@ -20,8 +22,9 @@ public class DrawingPanel extends JPanel
     /** description of instance variable x (add comment for each instance variable) */
     Color drawingColor;
     ArrayList<Shape> shapes;
-    boolean activeShape;
+    int activeShape;
     JColorChooser colorChooser;
+
     private static final int FRAME_WIDTH = 800;
     private static final int FRAME_HEIGHT = 800;
     
@@ -30,7 +33,16 @@ public class DrawingPanel extends JPanel
         //mouse listener
         public void mousePressed(MouseEvent event)
         {
-
+            for (int i=shapes.size()-1; i>=0; i--)
+            {
+                if (shapes.get(i).isInside(new Point2D.Double(event.getX(), event.getY())))
+                {
+                    activeShape=i;
+                    System.out.println(activeShape);
+                    
+                }
+            }
+            repaint();
         }
 
         public void mouseReleased(MouseEvent event)
@@ -56,6 +68,8 @@ public class DrawingPanel extends JPanel
 
         public void mouseDragged (MouseEvent event)
         {
+            shapes.get(activeShape).move(event.getX(), event.getY());
+            repaint();
         }
 
     }
@@ -101,7 +115,6 @@ public class DrawingPanel extends JPanel
     {
         Circle circle=new Circle(FRAME_WIDTH/2,FRAME_HEIGHT/2, 25, drawingColor);
         shapes.add(circle);
-        activeShape=true;
         repaint();
     }
     
@@ -109,20 +122,26 @@ public class DrawingPanel extends JPanel
     {
         Square square=new Square(FRAME_WIDTH/2,FRAME_HEIGHT/2, 45, drawingColor);
         shapes.add(square);
-        activeShape=true;
         repaint();
     }
     
-    public void paintComponent(Graphics2D g)
+    public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
         Graphics2D g2= (Graphics2D) g;
         for (int i=shapes.size()-1; i>=0; i--)
         {
-            shapes.get(i).draw(g2,true);
-            
-            
+            if ( i!=activeShape)
+            {
+                shapes.get(i).draw(g2,true);
+                System.out.println("2");
+            }
         }
+        if (shapes.size()>0)
+            {
+                shapes.get(activeShape).draw(g2,false);
+                System.out.println("3");
+            }
             
     }
 }

@@ -68,11 +68,12 @@ public class ControlPanel extends JPanel
             }
             if (event.getActionCommand()== "Add a Circle")
             {
-                //canvas.addCircle();
+                canvas.addCircle();
+                label.setText("Button "+event.getActionCommand()+" was clicked.");
             }
             if (event.getActionCommand()== "Add a Square")
             {
-                //canvas.addSquare();
+                canvas.addSquare();
             }
         }
      
