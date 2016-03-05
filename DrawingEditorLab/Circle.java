@@ -20,22 +20,29 @@ public class Circle extends Shape
     {
         super(x, y, r, color);
         drawingcolor=color;
-        circle=new Ellipse2D.Double(getRadius(),getRadius(),(getCenter().getX()),(getCenter().getY()));
+        
         
     }
     
     public boolean isInside(Point2D.Double point)
     {
+        circle=new Ellipse2D.Double((getCenter().getX()),(getCenter().getY()), getRadius(), getRadius());
         return circle.contains(point.getX(), point.getY());
+        
     }
     
     
     public void draw(Graphics2D g, boolean filled)
     {
+        circle=new Ellipse2D.Double((getCenter().getX()),(getCenter().getY()), getRadius(), getRadius());
         Graphics2D g2= (Graphics2D) g;
         g2.setColor(drawingcolor);
         g2.draw(circle);
-        g2.fill(circle);
+        if (filled)
+        {
+            g2.fill(circle);
+        }
+       
         
     }
     

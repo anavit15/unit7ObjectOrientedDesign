@@ -34,7 +34,8 @@ public abstract class Shape
     
     public void move(double x, double y)
     {
-        center.setLocation((center.getX()-x),(center.getY()-y));
+        //center.setLocation((center.getX()-x),(center.getY()-y));
+        center.setLocation((x),(y));
     }
     
     public void setRadius(double r)
@@ -43,7 +44,7 @@ public abstract class Shape
     }
     
     public abstract boolean isInside(Point2D.Double point);
-    //public abstract boolean isOnBorder(Point2D.Double point);
+   //public abstract boolean isOnBorder(Point2D.Double point);
     public abstract void draw(Graphics2D g2, boolean filled);
   
     

@@ -22,57 +22,14 @@ public class DrawingPanel extends JPanel
     /** description of instance variable x (add comment for each instance variable) */
     Color drawingColor;
     ArrayList<Shape> shapes;
-    int activeShape;
+    boolean activeShape;
     JColorChooser colorChooser;
+    private Shape active;
 
     private static final int FRAME_WIDTH = 800;
     private static final int FRAME_HEIGHT = 800;
     
-    class MousePressListener implements MouseListener, MouseMotionListener
-    {
-        //mouse listener
-        public void mousePressed(MouseEvent event)
-        {
-            for (int i=shapes.size()-1; i>=0; i--)
-            {
-                if (shapes.get(i).isInside(new Point2D.Double(event.getX(), event.getY())))
-                {
-                    activeShape=i;
-                    System.out.println(activeShape);
-                    
-                }
-            }
-            repaint();
-        }
-
-        public void mouseReleased(MouseEvent event)
-        {
-        }
-
-        public void mouseClicked(MouseEvent event)
-        {
-        }
-
-        public void mouseEntered(MouseEvent event)
-        {
-        }
-
-        public void mouseExited(MouseEvent event) 
-        {
-        }
-
-        //mouse motion listener
-        public void mouseMoved(MouseEvent event)
-        {
-        }
-
-        public void mouseDragged (MouseEvent event)
-        {
-            shapes.get(activeShape).move(event.getX(), event.getY());
-            repaint();
-        }
-
-    }
+    
     /**
      * Default constructor for objects of class DrawingPanel
      */
@@ -81,8 +38,9 @@ public class DrawingPanel extends JPanel
         setBackground(Color.WHITE);
         drawingColor=Color.BLACK;
 
-        MouseListener listener=new MousePressListener();
+        MousePressListener listener=new MousePressListener();
         addMouseListener(listener);
+        addMouseMotionListener(listener);
 
         shapes= new ArrayList<Shape>();
         
@@ -129,19 +87,84 @@ public class DrawingPanel extends JPanel
     {
         super.paintComponent(g);
         Graphics2D g2= (Graphics2D) g;
-        for (int i=shapes.size()-1; i>=0; i--)
+        System.out.println(activeShape);
+        
+        
+        if (activeShape==true)
         {
-            if ( i!=activeShape)
-            {
-                shapes.get(i).draw(g2,true);
-                System.out.println("2");
+           shapes.remove(active);
+           for (int i=0; i<shapes.size();i++)
+           {
+               shapes.get(i).draw(g2,true);
+               
+            }
+            active.draw(g2,false);
+            shapes.add(active);
+            
+        }
+        else if (activeShape==false)
+        {
+            for (int i=0; i<shapes.size();i++)
+           {
+               
+               shapes.get(i).draw(g2,true);
+               
             }
         }
-        if (shapes.size()>0)
+    }
+        
+    
+    class MousePressListener implements MouseListener, MouseMotionListener
+    {
+        //mouse listener
+        public void mousePressed(MouseEvent event)
+        {
+            for (int i=shapes.size()-1; i>=0; i--)
+            //for (int i=0; i<shapes.size();i++)
             {
-                shapes.get(activeShape).draw(g2,false);
-                System.out.println("3");
+                if (shapes.get(i).isInside(new Point2D.Double(event.getX(), event.getY()))==true)
+                {
+                    activeShape=true;
+                    active=shapes.get(i);
+                    //System.out.println(activeShape);
+                    
+                }
+                else
+                {
+                    activeShape=false;
+                }
             }
-            
+            repaint();
+        }
+
+        public void mouseReleased(MouseEvent event)
+        {
+        }
+
+        public void mouseClicked(MouseEvent event)
+        {
+        }
+
+        public void mouseEntered(MouseEvent event)
+        {
+        }
+
+        public void mouseExited(MouseEvent event) 
+        {
+        }
+
+        //mouse motion listener
+        public void mouseMoved(MouseEvent event)
+        {
+        }
+
+        public void mouseDragged (MouseEvent event)
+        {
+            activeShape=true;
+            active.move(event.getX(), event.getY());
+            activeShape=true;
+            repaint();
+        }
+
     }
 }

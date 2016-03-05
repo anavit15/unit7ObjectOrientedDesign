@@ -20,17 +20,19 @@ public class Square extends Shape
     {
         super(x, y, r, color);
         drawingcolor=color;
-        rectangle=new Rectangle2D.Double(getCenter().getX(), getCenter().getY(), getRadius(), getRadius()); 
+        
     }
     
     public boolean isInside(Point2D.Double point)
     {
+        rectangle=new Rectangle2D.Double(getCenter().getX(), getCenter().getY(), getRadius(), getRadius()); 
         return rectangle.contains(point.getX(), point.getY());
     }
     
     
     public void draw(Graphics2D g, boolean filled)
     {
+        rectangle=new Rectangle2D.Double(getCenter().getX(), getCenter().getY(), getRadius(), getRadius()); 
         Graphics2D g2= (Graphics2D) g;
         g2.setColor(drawingcolor);
         g2.draw(rectangle);
